@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(!empty($_SESSION['iduser'])) header('location: home.php'); 
+if(!empty($_SESSION['iduser'])) header('location: home.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -34,18 +34,18 @@ require("library/koneksi.php");
       <div class="card-body">
         <?php
             if(isset($_POST['submitsignin'])){
-                $getNrp = $_POST['nrp'];
+                $getnim = $_POST['nim'];
                 $getPas = $_POST['pass'];
 
-                $cekmhs = $db->query("SELECT * FROM mahasiswa WHERE nrp = '".$getNrp."'")->num_rows;
+                $cekmhs = $db->query("SELECT * FROM mahasiswa WHERE nim = '".$getnim."'")->num_rows;
                 if($cekmhs == 1){
                     //query jika mahasiswa yg login
-                    $query = $db->query("SELECT l.* FROM login l JOIN mahasiswa m ON l.iduser = m.idmhs 
-                    WHERE m.nrp = '".$getNrp."' AND l.password = '".$getPas."' AND l.jenis = 'M'");
+                    $query = $db->query("SELECT l.* FROM login l JOIN mahasiswa m ON l.iduser = m.idmhs
+                    WHERE m.nim = '".$getnim."' AND l.password = '".$getPas."' AND l.jenis = 'M'");
                 }else{
                     //query jika pegawai yg login
-                    $query = $db->query("SELECT l.* FROM login l JOIN pegawai m ON l.iduser = m.idpegawai 
-                    WHERE m.nip = '".$getNrp."' AND l.password = '".$getPas."' AND l.jenis = 'P'");
+                    $query = $db->query("SELECT l.* FROM login l JOIN pegawai m ON l.iduser = m.idpegawai
+                    WHERE m.nip = '".$getnim."' AND l.password = '".$getPas."' AND l.jenis = 'P'");
                 }
 
                 $getMhs = $query->fetch_array();
@@ -62,7 +62,7 @@ require("library/koneksi.php");
        <form class="form-signin" method="post" action="signin.php">
                 <span id="reauth-email" class="reauth-email"></span>
                 <label for="exampleInputEmail1">UserID</label>
-                    <input name="nrp" type="text" id="inputEmail" class="form-control" placeholder="UserID" required autofocus>
+                    <input name="nim" type="text" id="inputEmail" class="form-control" placeholder="UserID" required autofocus>
                 <label for="exampleInputPassword1">Password</label>
                     <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">

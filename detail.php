@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ require("library/koneksi.php");
                     $dd = $db->query("SELECT * FROM ruangan WHERE idruangan = '".$idruang."'")->fetch_array();
                 } else {
                     $dd = ['idruangan'=>'','kode'=>'','foto'=>'','nama'=>'','status'=>''];
-                } 
+                }
                 //end get
 
                 //process submit
@@ -60,7 +60,7 @@ require("library/koneksi.php");
                             move_uploaded_file($_FILES['foto']['tmp_name'], "upload/images/".$_FILES['foto']['name']);
                         }
                     }else{
-                        $sql = $db->query("INSERT INTO ruangan VALUES ('','".$_POST['kode']."','".$_FILES['foto']['name']."','".$_POST['nama']."','".$_POST['status']."')"); 
+                        $sql = $db->query("INSERT INTO ruangan VALUES ('','".$_POST['kode']."','".$_FILES['foto']['name']."','".$_POST['nama']."','".$_POST['status']."')");
                         move_uploaded_file($_FILES['foto']['tmp_name'], "upload/images/".$_FILES['foto']['name']);
                     }
 
@@ -75,7 +75,7 @@ require("library/koneksi.php");
                 ?>
                 <div class="row">
                     <div class="col-sm-6">
-                     <img src="upload/images/<?php echo $dd['foto'];?>" width="450px" class="img-responsive" />   
+                     <img src="upload/images/<?php echo $dd['foto'];?>" width="450px" class="img-responsive" />
                     </div>
                     <div class="col-sm-6">
                         <form class="form-vertical" method="post" action="roomsform.php" enctype="multipart/form-data">
@@ -125,17 +125,17 @@ require("library/koneksi.php");
                                 $jml = $db->query("SELECT * FROM transaksi WHERE idruangan='".$_GET['id']."'")->fetch_array();
                                 if(count($jml) > 0){
                                     $sql = $db->query("SELECT * FROM transaksi WHERE idruangan='".$_GET['id']."' ORDER BY idtransaksi DESC"); $n=0;
-                                    while($dd = $sql->fetch_array()){ $n++; 
-                                        $nama = $db->query("SELECT * FROM mahasiswa WHERE nrp='".$dd['idlogin']."'")->fetch_array(); 
+                                    while($dd = $sql->fetch_array()){ $n++;
+                                        $nama = $db->query("SELECT * FROM mahasiswa WHERE nim='".$dd['idlogin']."'")->fetch_array(); 
                                         $nmruang = $db->query("SELECT * FROM ruangan WHERE idruangan = '".$dd['idruangan']."'")->fetch_array();
-                                        
-                                        if($dd['status'] == 'P') 
+
+                                        if($dd['status'] == 'P')
                                             $st = "<a href='javascript:;' class='text-warning'>PENDING</a>";
-                                        elseif($dd['status'] == 'B') 
+                                        elseif($dd['status'] == 'B')
                                             $st = "<a href='javascript:;' class='text-success'>ACC</a>";
-                                        elseif($dd['status'] == 'S') 
+                                        elseif($dd['status'] == 'S')
                                             $st = "<a href='javascript:;' class='text-primary'>SELESAI</a>";
-                                        else 
+                                        else
                                             $st = "<a href='javascript:;' class='text-danger'>DITOLAK</a>";
                                         ?>
                                     <tr>

@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -50,12 +50,12 @@ require("library/koneksi.php");
                         }
                     }
                 ?>
-            
+
                 <table class="table table-striped">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nrp</th>
+                        <th>NIM</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>No Telepon</th>
@@ -74,7 +74,7 @@ require("library/koneksi.php");
                                 echo "<tr>";
 
                                 echo "<td>".$n."</td>";
-                                echo "<td>".$mahasiswa['nrp']."</td>";
+                                echo "<td>".$mahasiswa['nim']."</td>";
                                 echo "<td>".$mahasiswa['nama']."</td>";
                                 echo "<td>".$mahasiswa['alamat']."</td>";
                                 echo "<td>".$mahasiswa['notlpn']."</td>";

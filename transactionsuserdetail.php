@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -38,9 +38,9 @@ require("library/koneksi.php");
 
                 <?php
                 //dapat transaksi
-                $gettrasn = $db->query("SELECT t.*, m.*, r.*, m.nama as namapeminjam, r.nama as namaruang 
-                                FROM (transaksi t JOIN mahasiswa m ON t.idlogin = m.nrp ) 
-                                    JOIN ruangan r ON t.idruangan = r.idruangan 
+                $gettrasn = $db->query("SELECT t.*, m.*, r.*, m.nama as namapeminjam, r.nama as namaruang
+                                FROM (transaksi t JOIN mahasiswa m ON t.idlogin = m.nim ) 
+                                    JOIN ruangan r ON t.idruangan = r.idruangan
                                 WHERE idtransaksi = '".$_GET['id']."'")
                     ->fetch_array();
                 ?>
@@ -54,9 +54,9 @@ require("library/koneksi.php");
                                 <h3>Informasi Peminjam</h3>
                                 <table class="table table-bordered">
                                     <tr>
-                                        <td>NRP</td>
+                                        <td>nim</td>
                                         <td>:</td>
-                                        <td><?php echo $gettrasn['nrp'];?></td>
+                                        <td><?php echo $gettrasn['nim'];?></td>
                                     </tr>
                                     <tr>
                                         <td>Nama</td>
@@ -198,7 +198,7 @@ require("library/koneksi.php");
 
     $("#selesaipinjam").click(function(e){
         e.preventDefault();
-        
+
         $("#myModalSelesaiPinjam").modal("show");
     });
     </script>

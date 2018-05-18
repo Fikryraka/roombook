@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ require("library/koneksi.php");
     <div id="wrapper" class="toggled">
 
         <?php include("layout/menu.php");?>
-        
+
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -43,27 +43,26 @@ require("library/koneksi.php");
                     $idmhs = $_GET['id'];
                     $dd = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$idmhs."'")->fetch_array();
                 } else {
-                    $dd = ['idmhs'=>'','nrp'=>'','nama'=>'','nama'=>'','goldar'=>'','tgllahir'=>'','templahir'=>'','alamat'=>'','notlpn'=>'','asalsekolah'=>'','alamatortu'=>'','jalur'=>''];
-                } 
+                    $dd = ['idmhs'=>'','nim'=>'','nama'=>'','nama'=>'','goldar'=>'','tgllahir'=>'','templahir'=>'','alamat'=>'','notlpn'=>'','asalsekolah'=>'','alamatortu'=>'','jalur'=>''];
+                }
                 //end get
 
                 // process submit
                 if(isset($_POST['btnaddmhs'])){
                     //cek idmahasiswa jika ada lakukan update else lakukan insert
                     if($_POST['idmhs'] != ''){
-                        $sql = $db->query("UPDATE mahasiswa SET 
-                            nrp='".$_POST['nrp']."', 
-                            nama='".$_POST['nama']."', 
-                            goldar='".$_POST['goldar']."', 
-                            tgllahir='".$_POST['tgllahir']."', 
-                            templahir='".$_POST['templahir']."', 
-                            alamat='".$_POST['alamat']."', 
-                            notlpn='".$_POST['notlpn']."', 
-                            asalsekolah='".$_POST['asalsekolah']."', 
-                            alamatortu='".$_POST['alamatortu']."', 
-                            jalur='".$_POST['jalur']."' WHERE idmhs = '".$_POST['idmhs']."'");
+                        $sql = $db->query("UPDATE mahasiswa SET
+                            nim='".$_POST['nim']."',
+                            nama='".$_POST['nama']."',
+                            goldar='".$_POST['goldar']."',
+                            tgllahir='".$_POST['tgllahir']."',
+                            templahir='".$_POST['templahir']."',
+                            alamat='".$_POST['alamat']."',
+                            notlpn='".$_POST['notlpn']."',
+                            asalsekolah='".$_POST['asalsekolah']."',
+                            alamatortu='".$_POST['alamatortu']."' WHERE idmhs = '".$_POST['idmhs']."'");
                     }else{
-                        $sql = $db->query("INSERT INTO mahasiswa VALUES ('','".$_POST['nrp']."','".$_POST['nama']."','".$_POST['goldar']."','".$_POST['tgllahir']."','".$_POST['templahir']."','".$_POST['alamat']."','".$_POST['notlpn']."','".$_POST['asalsekolah']."','".$_POST['alamatortu']."','".$_POST['jalur']."')"); 
+                        $sql = $db->query("INSERT INTO mahasiswa VALUES ('','".$_POST['nim']."','".$_POST['nama']."','".$_POST['goldar']."','".$_POST['tgllahir']."','".$_POST['templahir']."','".$_POST['alamat']."','".$_POST['notlpn']."','".$_POST['asalsekolah']."','".$_POST['alamatortu']."')");
                     }
 
                     //cek jika berhasil
@@ -77,12 +76,12 @@ require("library/koneksi.php");
                 ?>
 
                 <form class="form-vertical" method="post" action="mahasiswaform.php" enctype="multipart/form-data">
-                    
+
                     <input type="hidden" name="idmhs" value="<?php echo $dd['idmhs'];?>">
-                    
+
                     <div class="form-group">
-                        <label class="control-label" for="email">Nrp</label>
-                        <input value="<?php echo $dd['nrp'];?>" name="nrp" placeholder="Enter nrp" type="text" class="form-control">
+                        <label class="control-label" for="email">nim</label>
+                        <input value="<?php echo $dd['nim'];?>" name="nim" placeholder="Enter nim" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">Nama</label>
@@ -117,14 +116,10 @@ require("library/koneksi.php");
                         <input value="<?php echo $dd['alamatortu'];?>" name="alamatortu" placeholder="Enter alamat orang tua" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Jalur Masuk</label>
-                        <input value="<?php echo $dd['jalur'];?>" name="jalur" placeholder="Enter jalur masuk" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <button class="btn btn-success" type="submit" name="btnaddmhs">Save Data Mahasiswa</button>
                     </div>
                 </form><!-- /form -->
-        
+
             </div>
         </div>
 

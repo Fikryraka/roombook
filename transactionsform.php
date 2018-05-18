@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'")->fetch_array();
 ?>
@@ -19,7 +19,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- <link href="vendor/datepicker/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
@@ -50,8 +50,8 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
                     $renamektm      = "KTM-".date("YmdHis").$_FILES['ktm']['name'];
                     $renamesurjin   = "SURJIN-".date("YmdHis").$_FILES['surjin']['name'];
 
-                    $sql = $db->query("INSERT INTO transaksi VALUES ('','".$_POST['nrp']."','".$_POST['koderuang']."','".date('Y-m-d H:i:s')."','".$_POST['tglpinjam']."','".$_POST['tglkembali']."','".$renamektm."','".$renamesurjin."','".$_POST['kegiatan']."','P','')");
-                    
+                    $sql = $db->query("INSERT INTO transaksi VALUES ('','".$_POST['nim']."','".$_POST['koderuang']."','".date('Y-m-d H:i:s')."','".$_POST['tglpinjam']."','".$_POST['tglkembali']."','".$renamektm."','".$renamesurjin."','".$_POST['kegiatan']."','P','')");
+
                     move_uploaded_file($_FILES['ktm']['tmp_name'], "upload/lampiran/".$renamektm);
                     move_uploaded_file($_FILES['surjin']['tmp_name'], "upload/lampiran/".$renamesurjin);
 
@@ -70,7 +70,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
                 <?php
                     if($sql['jenis'] == 'M'){
                         $getmhs = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$sql['iduser']."'")->fetch_array();
-                        $idpeminjam = $getmhs['nrp'];
+                        $idpeminjam = $getmhs['nim'];
                         $readonly = "readonly";
                     }else{
                         $idpeminjam = "";
@@ -83,7 +83,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label" for="email">NRP Mahasiswa</label>
+                                <label class="control-label" for="email">NIM Mahasiswa</label>
                                 <input <?php echo $readonly;?> name="nrp" value="<?php echo $idpeminjam;?>" placeholder="nrp" type="text" class="form-control" required>
 
                             </div>
@@ -98,7 +98,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
                                     }else{
                                         echo "<option value=''>-pilih-</option>";
                                     }
-                                    
+
                                     $ruan = $db->query("SELECT * FROM ruangan");
                                     while($dd = $ruan->fetch_array()){?>
                                     <option value="<?php echo $dd['idruangan'];?>"><?php echo $dd['nama']." - ".$dd['kode'];?></option>
@@ -110,8 +110,8 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
                                 <label class="control-label" for="pwd">Deskripsi Kegiatan</label>
                                 <textarea rows="5" name="kegiatan" class="form-control" placeholder="jelaskan kegiatannya" required></textarea>
                             </div>
-                            
-                            
+
+
                         </div>
 
                         <div class="col-sm-6">
@@ -175,7 +175,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    
+
     <script src="js/bootstrap-datetimepicker.js"></script>
 
     <!-- Menu Toggle Script -->

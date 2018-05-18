@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `mahasiswa`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mahasiswa` (
   `idmhs` int(11) NOT NULL AUTO_INCREMENT,
-  `nrp` varchar(15) NOT NULL,
+  `nim` varchar(15) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `goldar` varchar(5) NOT NULL,
   `tgllahir` date NOT NULL,

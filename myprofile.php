@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -45,8 +45,8 @@ require("library/koneksi.php");
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label">NRP Mahasiswa</label>
-                                <input readonly type="text" class="form-control" value="<?php echo $getmhs['nrp'];?>">
+                                <label class="control-label">NIM Mahasiswa</label>
+                                <input readonly type="text" class="form-control" value="<?php echo $getmhs['nim'];?>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Nama Mahasiswa</label>
@@ -84,7 +84,7 @@ require("library/koneksi.php");
                             </div>
                         </div>
 
-                    <?php } else{ 
+                    <?php } else{
                         $getmhs = $db->query("SELECT * FROM pegawai WHERE idpegawai = '".$sql['iduser']."'")->fetch_array(); ?>
                         <div class="col-sm-6">
                             <div class="form-group">
