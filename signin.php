@@ -75,7 +75,7 @@ require("library/koneksi.php");
                 </div>
                 <button name="submitsignin" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
             </form><!-- /form -->
-            <a href="signupnrp.php" class="forgot-password">Sign up</a>
+           <!-- <a href="signupnrp.php" class="forgot-password">Sign up</a> -->
         </div><!-- /card-container -->
     </div><!-- /container -->
 
