@@ -37,8 +37,8 @@ require("library/koneksi.php");
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
                 <br><br><br>
                 <?php
-                $lantai2 = $db->query("SELECT * FROM ruangan WHERE kode like '%-20%' ORDER BY kode DESC");
-                $lantai1 = $db->query("SELECT * FROM ruangan WHERE kode like '%-10%' ORDER BY kode DESC");
+                $lantai2 = $db->query("SELECT * FROM ruangan WHERE kode like '%.60%' ORDER BY kode DESC");
+                $lantai1 = $db->query("SELECT * FROM ruangan WHERE kode like '%.50%' ORDER BY kode DESC");
                 ?>
                 <table class="table table-bordered">
                     <tr>
