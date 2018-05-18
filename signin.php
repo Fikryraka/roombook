@@ -7,22 +7,18 @@ require("library/koneksi.php");
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Aplikasi Pinjam Ruang">
-    <meta name="author" content="Ahmad Ardiansyah">
-
-    <title>Aplikasi Pinjam Ruang</title>
-
-    <link rel="icon" type="text/css" href="upload/images/room.png">
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/login.css" rel="stylesheet">
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Login Multiuser</title>
+  <!-- Bootstrap core CSS-->
+  <link href="desain/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="desain/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="desain/css/sb-admin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,12 +27,12 @@ require("library/koneksi.php");
     include the remember me checkbox
     -->
     <br><br>
-    <div class="container">
-        <div class="card card-container">
-            <img class="profile-img-card" src="upload/images/room.png" alt="" />
-            <p id="profile-name" class="profile-name-card">Aplikasi Peminjaman Ruang</p>
-
-            <?php
+    <body class="bg-dark">
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <?php
             if(isset($_POST['submitsignin'])){
                 $getNrp = $_POST['nrp'];
                 $getPas = $_POST['pass'];
@@ -63,25 +59,30 @@ require("library/koneksi.php");
                 }
             }
             ?>
-            
-            <form class="form-signin" method="post" action="signin.php">
+       <form class="form-signin" method="post" action="signin.php">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input name="nrp" type="text" id="inputEmail" class="form-control" placeholder="NRP / NIP ..." required autofocus>
-                <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password..." required>
+                <label for="exampleInputEmail1">UserID</label>
+                <input name="nrp" type="text" id="inputEmail" class="form-control" placeholder="UserID" required autofocus>
+                <label for="exampleInputPassword1">Password</label>
+                <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
                 <button name="submitsignin" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </form><!-- /form -->
-           <!-- <a href="signupnrp.php" class="forgot-password">Sign up</a> -->
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+            </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="register.html"> </a>
+          <a class="d-block small" href="forgot-password.html"> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="desain/vendor/jquery/jquery.min.js"></script>
+  <script src="desain/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="desain/vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 </html>
