@@ -12,7 +12,7 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
 <div id="sidebar-wrapper">
    <ul class="sidebar-nav">
     <?php if($dptuser['jenis'] == 'P') { ?>
-        <li class="sidebar-brand"><a href="home.php">PEMINJAMAN RUANG</a></li>
+        <li class="sidebar-brand"><a href="dashboard.php">PEMINJAMAN RUANG</a></li>
         <li><a href="dashboard.php"><i class="glyphicon glyphicon-dashboard"></i> Dashboard</a></li>
         <li>
             <a href="transactions.php">Transactions
@@ -26,7 +26,7 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
         <li><a href="myprofile.php">My Profile</a></li>
         <li><a href="signout.php">Sign out</a></li>
     <?php } else { ?>
-        <li class="sidebar-brand"><a href="home.php">PEMINJAMAN RUANG</a></li>
+        <li class="sidebar-brand"><a href="dashboard.php">PEMINJAMAN RUANG</a></li>
         <li><a href="dashboard.php"><i class="glyphicon glyphicon-dashboard"></i> Dashboard</a></li>
         <li>
             <a href="transactionsuser.php">My Transactions 

@@ -53,7 +53,7 @@ require("library/koneksi.php");
                     //session user dimulai
                     session_start();
                     $_SESSION['iduser'] = $getMhs['idlogin'];
-                    header('location: home.php');
+                    header('location: dashboard.php');
                 } else {
                     echo "<p class='text-center'>Invalid Username or Password.</p>";
                 }
@@ -62,16 +62,16 @@ require("library/koneksi.php");
        <form class="form-signin" method="post" action="signin.php">
                 <span id="reauth-email" class="reauth-email"></span>
                 <label for="exampleInputEmail1">UserID</label>
-                <input name="nrp" type="text" id="inputEmail" class="form-control" placeholder="UserID" required autofocus>
+                    <input name="nrp" type="text" id="inputEmail" class="form-control" placeholder="UserID" required autofocus>
                 <label for="exampleInputPassword1">Password</label>
-                <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> Remember me
                     </label>
                 </div>
                 <button name="submitsignin" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </form>
+        </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="register.html"> </a>
           <a class="d-block small" href="forgot-password.html"> </a>
