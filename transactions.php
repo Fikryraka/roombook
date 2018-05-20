@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -34,15 +34,16 @@ require("library/koneksi.php");
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <h1>Transactions</h1>
+                <?php if ($kar['status'] == 'satpam'){
+                    echo ""?>     
+            <?php } else {?>
                 <a href="transactionsform.php" class="btn btn-primary">Add Transaction</a>
-
+            <?php } ?>
                 <a style="color: white" href="transactions.php?status=P" class="btn btn-warning">Pending</a>
                 <a href="transactions.php?status=B" class="btn btn-success">Acc</a>
                 <a href="transactions.php?status=S" class="btn btn-info">Selesai</a>
-                <a href="transactions.php?status=T" class="btn btn-danger">Tolak</a>
-
+                <a href="transactions.php?status=T" class="btn btn-danger">Ditolak</a>
                 <hr>
-
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -62,40 +63,47 @@ require("library/koneksi.php");
                         <?php
                         if($_GET['status'] == 'B'){
                             $jml = $db->query("SELECT * FROM transaksi WHERE status = 'B'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' ORDER BY idtransaksi DESC"); 
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' ORDER BY idtransaksi DESC");
                         } elseif ($_GET['status'] == 'S') {
                             $jml = $db->query("SELECT * FROM transaksi WHERE status = 'S'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'S' ORDER BY idtransaksi DESC"); 
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'S' ORDER BY idtransaksi DESC");
                         } elseif ($_GET['status'] == 'T') {
                             $jml = $db->query("SELECT * FROM transaksi WHERE status = 'T'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'T' ORDER BY idtransaksi DESC"); 
-                        }elseif ($_GET['status'] == 'P') {
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'T' ORDER BY idtransaksi DESC");
+                        } elseif ($_GET['status'] == 'P') {
                             $jml = $db->query("SELECT * FROM transaksi WHERE status = 'P'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' ORDER BY idtransaksi DESC"); 
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' ORDER BY idtransaksi DESC");
                         } else {
                             $jml = $db->query("SELECT * FROM transaksi WHERE status = 'P'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' ORDER BY idtransaksi DESC"); 
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' ORDER BY idtransaksi DESC");
                         }
                         if(count($jml) > 0){
                             $n=0;
-                            while($dd = $sql->fetch_array()){ $n++; 
+                            while($dd = $sql->fetch_array()){ $n++;
                                 $nmruang = $db->query("SELECT * FROM ruangan WHERE idruangan = '".$dd['idruangan']."'")->fetch_array();
-                                if($dd['status'] == 'P') 
+                                if($dd['status'] == 'P')
                                     $st = "<a href='javascript:;' class='text-warning pendingnya'>PENDING</a>";
-                                elseif($dd['status'] == 'B') 
+                                elseif($dd['status'] == 'B')
                                     $st = "<a href='transactionsdetail.php?id=".$dd['idtransaksi']."' class='text-success'>ACC</a>";
-                                elseif($dd['status'] == 'S') 
+                                elseif($dd['status'] == 'S')
                                     $st = "<a href='transactionsfeedback.php?id=".$dd['idtransaksi']."' class='text-primary'>SELESAI</a>";
-                                else 
+                                else
                                     $st = "<a href='transactionsdetail.php?id=".$dd['idtransaksi']."' class='text-danger'>DITOLAK</a>";
                                 ?>
                             <tr>
                                 <td><?php echo $n;?></td>
                                 <td>
                                     <?php echo $dd['idlogin'];?> <br>
-                                    <?php if($dd['status'] == 'P'){ ?>
+                                    <?php
+                                    $kar = $db->query("SELECT * FROM login INNER JOIN pegawai ON login.iduser = pegawai.idpegawai WHERE login.idlogin ='".$_SESSION['iduser']."'")->fetch_array();
+                                    $status = $kar['status'];
+                                    if ($status == 'satpam') {
+                                      echo"";
+                                    }else{
+                                      if($dd['status'] == 'P'){ ?>
                                         <a href="transactionsdetail.php?id=<?php echo $dd['idtransaksi'];?>" class="btn btn-primary">proses</a>
-                                    <?php } ?>
+                                    <?php }
+                                  } ?>
                                 </td>
                                 <td><?php echo $nmruang['kode'];?></td>
                                 <td><?php echo $dd['tgltransaksi'];?></td>

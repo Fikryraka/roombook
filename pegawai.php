@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ require("library/koneksi.php");
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
+                            <th>NIK</th>
                             <th>Nama</th>
                             <th>No. Telepon</th>
                             <th>Tempat Lahir</th>

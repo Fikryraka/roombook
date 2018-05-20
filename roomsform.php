@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ require("library/koneksi.php");
                     $dd = $db->query("SELECT * FROM ruangan WHERE idruangan = '".$idruang."'")->fetch_array();
                 } else {
                     $dd = ['idruangan'=>'','kode'=>'','foto'=>'','nama'=>'','status'=>''];
-                } 
+                }
                 //end get
 
                 //process submit
@@ -60,7 +60,7 @@ require("library/koneksi.php");
                             move_uploaded_file($_FILES['foto']['tmp_name'], "upload/images/".$_FILES['foto']['name']);
                         }
                     }else{
-                        $sql = $db->query("INSERT INTO ruangan VALUES ('','".$_POST['kode']."','".$_FILES['foto']['name']."','".$_POST['nama']."','".$_POST['status']."')"); 
+                        $sql = $db->query("INSERT INTO ruangan VALUES ('','".$_POST['kode']."','".$_FILES['foto']['name']."','".$_POST['nama']."','".$_POST['status']."')");
                         move_uploaded_file($_FILES['foto']['tmp_name'], "upload/images/".$_FILES['foto']['name']);
                     }
 
@@ -77,27 +77,27 @@ require("library/koneksi.php");
                 <form class="form-vertical" method="post" action="roomsform.php" enctype="multipart/form-data">
                     <input type="hidden" name="idruangan" value="<?php echo $dd['idruangan'];?>">
                     <div class="form-group">
-                        <label class="control-label" for="email">Kode Ruang</label>
-                        <input value="<?php echo $dd['kode'];?>" name="kode" placeholder="kode ruang..." type="text" class="form-control">
+                        <label class="control-label" >Kode Ruang</label>
+                        <input required value="<?php echo $dd['kode'];?>" name="kode" placeholder="kode ruang..." type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Nama Ruang</label>
-                        <input value="<?php echo $dd['nama'];?>" name="nama" placeholder="nama ruang..." type="text" class="form-control">
+                        <label class="control-label" >Nama Ruang</label>
+                        <input required value="<?php echo $dd['nama'];?>" name="nama" placeholder="nama ruang..." type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Status</label><br>
+                        <label class="control-label" >Status</label><br>
                         <label><input <?php echo ($dd['status'] == 'A') ? "checked":"";?> name="status" value="A" type="radio" class=""> &nbsp;Available</label><br>
-                        <label><input <?php echo ($dd['status'] == 'B') ? "checked":"";?> name="status" value="B" type="radio" class=""> &nbsp;Booking</label>
+                        <label><input <?php echo ($dd['status'] == 'B') ? "checked":"";?> name="status" value="B" type="radio" class=""> &nbsp;Booked</label>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Foto Ruangan</label>
-                        <input type="file" name="foto" class="form-control">
+                        <input required type="file" name="foto" class="form-control">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" type="submit" name="btnaddrooms">Save Room</button>
                     </div>
                 </form><!-- /form -->
-        
+
             </div>
         </div>
 

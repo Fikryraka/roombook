@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ require("library/koneksi.php");
     <div id="wrapper" class="toggled">
 
         <?php include("layout/menu.php");?>
-        
+
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -43,27 +43,27 @@ require("library/koneksi.php");
                     $idmhs = $_GET['id'];
                     $dd = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$idmhs."'")->fetch_array();
                 } else {
-                    $dd = ['idmhs'=>'','nrp'=>'','nama'=>'','nama'=>'','goldar'=>'','tgllahir'=>'','templahir'=>'','alamat'=>'','notlpn'=>'','asalsekolah'=>'','alamatortu'=>'','jalur'=>''];
-                } 
+                    $dd = ['idmhs'=>'','nim'=>'','nama'=>'','nama'=>'','goldar'=>'','tgllahir'=>'','templahir'=>'','alamat'=>'','notlpn'=>'','asalsekolah'=>'','alamatortu'=>'','jalur'=>''];
+                }
                 //end get
 
                 // process submit
                 if(isset($_POST['btnaddmhs'])){
                     //cek idmahasiswa jika ada lakukan update else lakukan insert
                     if($_POST['idmhs'] != ''){
-                        $sql = $db->query("UPDATE mahasiswa SET 
-                            nrp='".$_POST['nrp']."', 
-                            nama='".$_POST['nama']."', 
-                            goldar='".$_POST['goldar']."', 
-                            tgllahir='".$_POST['tgllahir']."', 
-                            templahir='".$_POST['templahir']."', 
-                            alamat='".$_POST['alamat']."', 
-                            notlpn='".$_POST['notlpn']."', 
-                            asalsekolah='".$_POST['asalsekolah']."', 
-                            alamatortu='".$_POST['alamatortu']."', 
+                        $sql = $db->query("UPDATE mahasiswa SET
+                            nim='".$_POST['nim']."',
+                            nama='".$_POST['nama']."',
+                            goldar='".$_POST['goldar']."',
+                            tgllahir='".$_POST['tgllahir']."',
+                            templahir='".$_POST['templahir']."',
+                            alamat='".$_POST['alamat']."',
+                            notlpn='".$_POST['notlpn']."',
+                            asalsekolah='".$_POST['asalsekolah']."',
+                            alamatortu='".$_POST['alamatortu']."',
                             jalur='".$_POST['jalur']."' WHERE idmhs = '".$_POST['idmhs']."'");
                     }else{
-                        $sql = $db->query("INSERT INTO mahasiswa VALUES ('','".$_POST['nrp']."','".$_POST['nama']."','".$_POST['goldar']."','".$_POST['tgllahir']."','".$_POST['templahir']."','".$_POST['alamat']."','".$_POST['notlpn']."','".$_POST['asalsekolah']."','".$_POST['alamatortu']."','".$_POST['jalur']."')"); 
+                        $sql = $db->query("INSERT INTO mahasiswa VALUES ('','".$_POST['nim']."','".$_POST['nama']."','".$_POST['goldar']."','".$_POST['tgllahir']."','".$_POST['templahir']."','".$_POST['alamat']."','".$_POST['notlpn']."','".$_POST['asalsekolah']."','".$_POST['alamatortu']."','".$_POST['jalur']."')");
                     }
 
                     //cek jika berhasil
@@ -77,54 +77,38 @@ require("library/koneksi.php");
                 ?>
 
                 <form class="form-vertical" method="post" action="mahasiswaform.php" enctype="multipart/form-data">
-                    
+
                     <input type="hidden" name="idmhs" value="<?php echo $dd['idmhs'];?>">
-                    
+
                     <div class="form-group">
-                        <label class="control-label" for="email">Nrp</label>
-                        <input value="<?php echo $dd['nrp'];?>" name="nrp" placeholder="Enter nrp" type="text" class="form-control">
+                        <label class="control-label" >NIM</label>
+                        <input required value="<?php echo $dd['nim'];?>" name="nim" placeholder="Enter nim" type="number" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Nama</label>
-                        <input value="<?php echo $dd['nama'];?>" name="nama" placeholder="Enter nama" type="text" class="form-control">
+                        <label class="control-label" >Nama</label>
+                        <input required value="<?php echo $dd['nama'];?>" name="nama" placeholder="Enter nama" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Golongan Darah</label>
-                        <input value="<?php echo $dd['goldar'];?>" name="goldar" placeholder="Enter golongan darah" type="text" class="form-control">
+                        <label class="control-label" >Golongan Darah</label>
+                        <input required value="<?php echo $dd['goldar'];?>" name="goldar" placeholder="Enter golongan darah" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Tempat Lahir</label>
-                        <input value="<?php echo $dd['templahir'];?>" name="templahir" placeholder="Enter tempat lahir" type="text" class="form-control">
+                        <label class="control-label" >Tempat Lahir</label>
+                        <input required value="<?php echo $dd['templahir'];?>" name="templahir" placeholder="Enter tempat lahir" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Tanggal Lahir</label>
-                        <input value="<?php echo $dd['tgllahir'];?>" name="tgllahir" placeholder="Enter tanggal lahir" type="text" class="form-control">
+                        <label class="control-label" >Tanggal Lahir</label>
+                        <input required value="<?php echo $dd['tgllahir'];?>" name="tgllahir" placeholder="Enter tanggal lahir" type="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Alamat</label>
-                        <input value="<?php echo $dd['alamat'];?>" name="alamat" placeholder="Enter alamat" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="email">No Telepon</label>
-                        <input value="<?php echo $dd['notlpn'];?>" name="notlpn" placeholder="Enter no telepon" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="email">Asal Sekolah</label>
-                        <input value="<?php echo $dd['asalsekolah'];?>" name="asalsekolah" placeholder="Enter asal sekolah" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="email">Alamat Orang Tua</label>
-                        <input value="<?php echo $dd['alamatortu'];?>" name="alamatortu" placeholder="Enter alamat orang tua" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="email">Jalur Masuk</label>
-                        <input value="<?php echo $dd['jalur'];?>" name="jalur" placeholder="Enter jalur masuk" type="text" class="form-control">
+                        <label class="control-label" >Alamat</label>
+                        <input required value="<?php echo $dd['alamat'];?>" name="alamat" placeholder="Enter alamat" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" type="submit" name="btnaddmhs">Save Data Mahasiswa</button>
                     </div>
                 </form><!-- /form -->
-        
+
             </div>
         </div>
 

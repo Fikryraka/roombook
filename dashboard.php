@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -33,22 +33,22 @@ require("library/koneksi.php");
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            
+
             <?php
                 $sql = $db->query("SELECT * FROM ruangan");
                 while ($dd = $sql->fetch_array()) { ?>
                     <div class="columns">
                       <ul class="price">
 
-                        <?php 
-                        if($dd['status'] == 'A'){ 
-                            $dd1 = "available"; $st = "Available"; 
-                        }else { 
-                            $dd1 = "booking"; $st = "Booking";
+                        <?php
+                        if($dd['status'] == 'A'){
+                            $dd1 = "available"; $st = "Available";
+                        }else {
+                            $dd1 = "booking"; $st = "Booked";
                         }?>
                         <li class="<?php echo $dd1;?>"><?php echo $dd['kode'];?></li>
                         <li class="grey">
-                            <img src="upload/images/<?php echo $dd['foto'];?>" width="300px" class="img-responsive" />
+                            <img src="upload/images/<?php echo $dd['foto'];?>" width="300px"+ class="img-responsive" />
                         </li>
                         <li><?php echo $dd['nama'];?></li>
                         <li><?php echo $st;?></li>

@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ require("library/koneksi.php");
                 <a href="transactionsuser.php?status=B" class="btn btn-success">Acc</a>
                 <a href="transactionsuser.php?status=S" class="btn btn-info">Selesai</a>
                 <a href="transactionsuser.php?status=T" class="btn btn-danger">Tolak</a>
-                
+
                 <hr>
                 <?php
                 //aksi untuk feedback
@@ -67,7 +67,7 @@ require("library/koneksi.php");
                         echo '<div class="alert alert-success">
                                   <strong>Success!</strong> Terimakasih sudah memerikan feedback.
                                 </div>';
-                    else 
+                    else
                         echo '<div class="alert alert-danger">
                                   <strong>Failed!</strong> Terjadi kesalahan saat proses data.
                                 </div>';
@@ -90,38 +90,38 @@ require("library/koneksi.php");
                     </thead>
                     <tbody>
                         <?php
-                        $getnrp = $db->query("SELECT m.nrp FROM login l JOIN mahasiswa m ON l.iduser = m.idmhs WHERE l.idlogin = '".$_SESSION['iduser']."'")->fetch_array();
+                        $getnim = $db->query("SELECT m.nim FROM login l JOIN mahasiswa m ON l.iduser = m.idmhs WHERE l.idlogin = '".$_SESSION['iduser']."'")->fetch_array();
 
                         if($_GET['status'] == 'P') {
-                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'P' AND idlogin = '".$getnrp['nrp']."'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' AND idlogin = '".$getnrp['nrp']."' ORDER BY idtransaksi DESC");
+                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'P' AND idlogin = '".$getnim['nim']."'")->fetch_array();
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'P' AND idlogin = '".$getnim['nim']."' ORDER BY idtransaksi DESC");
                         } elseif ($_GET['status'] == 'B') {
-                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnrp['nrp']."'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnrp['nrp']."' ORDER BY idtransaksi DESC");
+                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnim['nim']."'")->fetch_array();
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnim['nim']."' ORDER BY idtransaksi DESC");
                         } elseif ($_GET['status'] == 'S') {
-                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'S' AND idlogin = '".$getnrp['nrp']."'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'S' AND idlogin = '".$getnrp['nrp']."' ORDER BY idtransaksi DESC");
+                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'S' AND idlogin = '".$getnim['nim']."'")->fetch_array();
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'S' AND idlogin = '".$getnim['nim']."' ORDER BY idtransaksi DESC");
                         } elseif ($_GET['status'] == 'T') {
-                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'T' AND idlogin = '".$getnrp['nrp']."'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'T' AND idlogin = '".$getnrp['nrp']."' ORDER BY idtransaksi DESC");
+                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'T' AND idlogin = '".$getnim['nim']."'")->fetch_array();
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'T' AND idlogin = '".$getnim['nim']."' ORDER BY idtransaksi DESC");
                         } else {
-                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnrp['nrp']."'")->fetch_array();
-                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnrp['nrp']."' ORDER BY idtransaksi DESC");
+                            $jml = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnim['nim']."'")->fetch_array();
+                            $sql = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$getnim['nim']."' ORDER BY idtransaksi DESC");
                         }
-                        
+
 
                         if(count($jml) > 0){
                             $n=0;
-                            while($dd = $sql->fetch_array()){ $n++; 
+                            while($dd = $sql->fetch_array()){ $n++;
                                 $nmruang = $db->query("SELECT * FROM ruangan WHERE idruangan = '".$dd['idruangan']."'")->fetch_array();
-                                
-                                if($dd['status'] == 'P') 
+
+                                if($dd['status'] == 'P')
                                     $st = "<a href='javascript:;' class='text-warning modalpending'>PENDING</a>";
-                                elseif($dd['status'] == 'B') 
+                                elseif($dd['status'] == 'B')
                                     $st = "<a href='transactionsuserdetail.php?id=".$dd['idtransaksi']."' class='text-success'>ACC</a>";
-                                elseif($dd['status'] == 'S') 
+                                elseif($dd['status'] == 'S')
                                     $st = "<a href='transactionsfeedback.php?id=".$dd['idtransaksi']."' class='text-primary'>SELESAI</a>";
-                                else 
+                                else
                                     $st = "<a href='#myModalAlasanTolak".$n."' id='alasantolak' data-toggle='modal'  class='text-danger'>DITOLAK</a>";
                                 ?>
                             <tr>
@@ -142,7 +142,7 @@ require("library/koneksi.php");
                                         <hr>
 
                                             <p><?php echo $dd['keterangan'];?></p>
-                                        
+
                                         <hr>
                                         <input type="button" name="submit" class="btn btn-primary" data-dismiss="modal" value="Okay">
                                       </form>

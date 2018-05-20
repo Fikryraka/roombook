@@ -1,8 +1,10 @@
 <?php
 $dptuser = $db->query("SELECT * FROM login WHERE idlogin='".$_SESSION['iduser']."'")->fetch_array();
 
-//user peawai
+//user pegawai
 $hitung1 = $db->query("SELECT * FROM transaksi WHERE status = 'P'")->num_rows;
+$kar = $db->query("SELECT * FROM login INNER JOIN pegawai ON login.iduser = pegawai.idpegawai WHERE login.idlogin ='".$_SESSION['iduser']."'")->fetch_array();
+$status = $kar['status'];
 
 //user mahasiswa
 $trans = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$dptuser['iduser']."'")->fetch_array();
@@ -30,7 +32,7 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
 <body class="fixed-nav sticky-footer" id="page-top">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="dashboard.php">Peminjaman Ruangan</a>
-    
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span></button>
 
@@ -48,9 +50,17 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Transactions<span style="float: right; padding-right: 15px">
                  <?php echo $hitung1;?></span></span>
-            
+
           </a>
     </li>
+    <?php if ($status == 'satpam') { ?>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+            <a class="nav-link" href="myprofile.php">
+              <i class="fa fa-fw fa-file"></i>
+              <span class="nav-link-text">My Profile</span>
+            </a>
+      </li>
+    <?php } elseif ($status == 'admin') { ?>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="rooms.php">
             <i class="fa fa-fw fa-table"></i>
@@ -58,30 +68,49 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
           </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link" href="members.php"> 
+          <a class="nav-link" href="members.php">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Members</span>
           </a>
     </li>
      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link" href="pegawai.php"> 
+          <a class="nav-link" href="pegawai.php">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Pegawai</span>
           </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link" href="mahasiswa.php"> 
+          <a class="nav-link" href="mahasiswa.php">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Mahasiswa</span>
           </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link" href="myprofile.php"> 
+          <a class="nav-link" href="myprofile.php">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">My Profile</span>
           </a>
     </li>
-
+  <?php } else { ?>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="rooms.php">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Rooms</span>
+          </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+          <a class="nav-link" href="mahasiswa.php">
+            <i class="fa fa-fw fa-sitemap"></i>
+            <span class="nav-link-text">Mahasiswa</span>
+          </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link" href="myprofile.php">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">My Profile</span>
+          </a>
+    </li>
+    <?php } ?>
 
     <?php } else { ?>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -96,11 +125,11 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Transactions<span style="float: right; padding-right: 15px">
                  <?php echo $hitung2;?></span></span>
-            
+
           </a>
     </li>
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link" href="myprofile.php"> 
+          <a class="nav-link" href="myprofile.php">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">My Profile</span>
           </a>
@@ -117,7 +146,7 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="signout.php"> 
+            <a class="nav-link" href="signout.php">
             <i class="fa fa-fw fa-sign-out"></i>
             <span class="nav-link-text">Sign out</span>
             </a>

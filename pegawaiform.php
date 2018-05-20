@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -45,9 +45,9 @@ require("library/koneksi.php");
                 } else {
                     $dd = [
                         'idpegawai'=>'','nip'=>'','nama'=>'','tgllahir'=>'',
-                        'templahir'=>'','alamat'=>'','notlpn'=>''
+                        'templahir'=>'','alamat'=>'','notlpn'=>'','status'=>''
                     ];
-                } 
+                }
                 //end get
 
                 //process submit
@@ -55,10 +55,10 @@ require("library/koneksi.php");
                     //cek idpegawai jika ada lakukan update else lakukan insert
                     if($_POST['idpegawai'] != ''){
                         //query update
-                        $sql = $db->query("UPDATE pegawai SET nip='".$_POST['nip']."', nama='".$_POST['nama']."', tgllahir='".$_POST['tgllahir']."', templahir='".$_POST['templahir']."', alamat='".$_POST['alamat']."', notlpn='".$_POST['notlpn']."' WHERE idpegawai = '".$_POST['idpegawai']."'");
+                        $sql = $db->query("UPDATE pegawai SET nip='".$_POST['nip']."', nama='".$_POST['nama']."', tgllahir='".$_POST['tgllahir']."', templahir='".$_POST['templahir']."', alamat='".$_POST['alamat']."', notlpn='".$_POST['notlpn']."', status='".$_POST['status']."' WHERE idpegawai = '".$_POST['idpegawai']."'");
                     }else{
                         //query insert
-                        $sql = $db->query("INSERT INTO pegawai VALUES ('','".$_POST['nip']."','".$_POST['nama']."','".$_POST['tgllahir']."','".$_POST['templahir']."', '".$_POST['alamat']."', '".$_POST['notlpn']."')"); 
+                        $sql = $db->query("INSERT INTO pegawai VALUES ('','".$_POST['nip']."','".$_POST['nama']."','".$_POST['tgllahir']."','".$_POST['templahir']."', '".$_POST['alamat']."', '".$_POST['notlpn']."', '".$_POST['status']."')");
                     }
 
                     //cek jika berhasil
@@ -74,34 +74,38 @@ require("library/koneksi.php");
                 <form class="form-vertical" method="post" action="pegawaiform.php" enctype="multipart/form-data">
                     <input type="hidden" name="idpegawai" value="<?php echo $dd['idpegawai'];?>">
                     <div class="form-group">
-                        <label class="control-label" for="email">NIP Pegawai</label>
-                        <input required value="<?php echo $dd['nip'];?>" name="nip" placeholder="nip pegawai..." type="text" class="form-control">
+                        <label class="control-label" >NIK Pegawai</label>
+                        <input required value="<?php echo $dd['nip'];?>" name="nip" placeholder="nik pegawai..." type="number" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Nama Pegawai</label>
+                        <label class="control-label" >Nama Pegawai</label>
                         <input required value="<?php echo $dd['nama'];?>" name="nama" placeholder="nama pegawai..." type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Tempat Lahir</label>
+                        <label class="control-label" >Jabatan Pegawai</label>
+                        <input required value="<?php echo $dd['status'];?>" name="status" placeholder="jabatan pegawai..." type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" >Tempat Lahir</label>
                         <input required value="<?php echo $dd['templahir'];?>" name="templahir" placeholder="tempat lahir..." type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Tanggal Lahir</label>
-                        <input required value="<?php echo $dd['tgllahir'];?>" name="tgllahir" placeholder="tanggal lahir..." type="text" class="form-control">
+                        <label class="control-label" >Tanggal Lahir</label>
+                        <input required value="<?php echo $dd['tgllahir'];?>" name="tgllahir" placeholder="tanggal lahir..." type="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">No. Telepon</label>
-                        <input required value="<?php echo $dd['notlpn'];?>" name="notlpn" placeholder="nomor telepon..." type="text" class="form-control">
+                        <label class="control-label" >No. Telepon</label>
+                        <input required value="<?php echo $dd['notlpn'];?>" name="notlpn" placeholder="nomor telepon..." type="number" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="email">Alamat Lengkap</label>
+                        <label class="control-label" >Alamat Lengkap</label>
                         <textarea required class="form-control" name="alamat" placeholder="alamat lengkap..."><?php echo $dd['alamat'];?></textarea>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" type="submit" name="btnaddpegawai">Save Pegawai</button>
                     </div>
                 </form><!-- /form -->
-        
+
             </div>
         </div>
 

@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if(empty($_SESSION['iduser'])) header('location: signin.php'); 
+if(empty($_SESSION['iduser'])) header('location: signin.php');
 require("library/koneksi.php");
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ require("library/koneksi.php");
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NRP / NIP</th>
+                            <th>NIM / NIK</th>
                             <th>Nama User</th>
                             <th>Jenis</th>
                             <th>Password</th>
@@ -62,7 +62,7 @@ require("library/koneksi.php");
                         <?php
                         $n=0;
                         $sql = $db->query("SELECT * FROM login ORDER BY idlogin DESC");
-                        while($dd = $sql->fetch_array()){ $n++; 
+                        while($dd = $sql->fetch_array()){ $n++;
                             if($dd['jenis'] == 'M'){
                                 $nmus = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$dd['iduser']."'")->fetch_array();
                             }else{
@@ -71,7 +71,7 @@ require("library/koneksi.php");
                             ?>
                             <tr>
                                 <td><?php echo $n;?></td>
-                                <td><?php echo ($dd['jenis'] == 'M') ? $nmus['nrp']:$nmus['nip'];?></td>
+                                <td><?php echo ($dd['jenis'] == 'M') ? $nmus['nim']:$nmus['nip'];?></td>
                                 <td><?php echo $nmus['nama'];?></td>
                                 <td><?php echo ($dd['jenis'] == 'M') ? "Mahasiswa":"Pegawai";?></td>
                                 <td><?php echo $dd['password'];?></td>
