@@ -11,7 +11,7 @@ require("library/koneksi.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Aplikasi Pinjam Ruang">
-    <meta name="author" content="Ahmad Ardiansyah">
+    <meta name="author" content="Fikry Raka">
 
     <title>Aplikasi Pinjam Ruang</title>
     <link rel="icon" type="text/css" href="upload/images/room.png">
@@ -83,7 +83,13 @@ require("library/koneksi.php");
                     </div>
                     <div class="form-group">
                         <label class="control-label" >Jabatan Pegawai</label>
-                        <input required value="<?php echo $dd['status'];?>" name="status" placeholder="jabatan pegawai..." type="text" class="form-control">
+                        <select name="status" class="form-control">
+                            <option value="satpam">Satpam</option>
+                            <option value="bap">BAP</option>
+                            <option value="kaprodi">Kaprodi</option>
+                            <option value="bagumum">Bagian Umum</option>
+                            <option value="admin">ADMINISTRATOR</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label" >Tempat Lahir</label>

@@ -12,7 +12,7 @@ $sql = $db->query("SELECT * FROM login WHERE idlogin = '".$_SESSION['iduser']."'
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Aplikasi Pinjam Ruang">
-    <meta name="author" content="Ahmad Ardiansyah">
+    <meta name="author" content="Fikry Raka">
 
     <title>Aplikasi Pinjam Ruang</title>
     <link rel="icon" type="text/css" href="upload/images/room.png">

@@ -11,7 +11,7 @@ require("library/koneksi.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Aplikasi Pinjam Ruang">
-    <meta name="author" content="Ahmad Ardiansyah">
+    <meta name="author" content="Fikry Raka">
 
     <title>Aplikasi Pinjam Ruang</title>
     <link rel="icon" type="text/css" href="upload/images/room.png">
@@ -87,7 +87,7 @@ require("library/koneksi.php");
                     <div class="form-group">
                         <label class="control-label" >Status</label><br>
                         <label><input <?php echo ($dd['status'] == 'A') ? "checked":"";?> name="status" value="A" type="radio" class=""> &nbsp;Available</label><br>
-                        <label><input <?php echo ($dd['status'] == 'B') ? "checked":"";?> name="status" value="B" type="radio" class=""> &nbsp;Booked</label>
+                        <label><input <?php echo ($dd['status'] == 'B') ? "checked":"";?> name="status" value="B" type="radio" class=""> &nbsp;Unavailable</label>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Foto Ruangan</label>

@@ -8,7 +8,7 @@ $status = $kar['status'];
 
 //user mahasiswa
 $trans = $db->query("SELECT * FROM mahasiswa WHERE idmhs = '".$dptuser['iduser']."'")->fetch_array();
-$hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = '".$trans['nrp']."'")->num_rows;
+$hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'P' AND  idlogin = '".$trans['nim']."'")->num_rows;
 ?>
 <!-- Sidebar -->
 
@@ -121,7 +121,7 @@ $hitung2 = $db->query("SELECT * FROM transaksi WHERE status = 'B' AND idlogin = 
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="transactionsuser.php">
+          <a class="nav-link" href="transactionsuser.php?status=P">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Transactions<span style="float: right; padding-right: 15px">
                  <?php echo $hitung2;?></span></span>
